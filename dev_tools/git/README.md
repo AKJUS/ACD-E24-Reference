@@ -4,6 +4,7 @@ This folder contains resources to help you understand and use Git for version co
 
 ## Contents
 
+- [Git Basics for GitHub Desktop Beginners](git_basics_for_github_desktop.md): Beginner-friendly GitHub Desktop basics guide.
 - [GitHub Desktop Guide](github_desktop_guide.md): Step-by-step guide on using GitHub Desktop for version control.
 - [Git Cheat Sheet](git_cheat_sheet.md): Quick reference for common Git commands with explicit examples.
 

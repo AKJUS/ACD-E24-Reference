@@ -19,7 +19,8 @@ ACD-E24-Reference/
 │   ├── git/
 │   │   ├── README.md
 │   │   ├── git_cheat_sheet.md
-│   │   └── github_desktop_guide.md
+│   │   ├── github_desktop_guide.md
+│   │   └── git_basics_for_github_desktop.md
 │   └── markdown/
 │       ├── README.md
 │       └── markdown_cheat_sheet.md
