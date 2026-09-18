@@ -1,12 +1,18 @@
-# Markdown Cheat Sheet
+# Markdown cheat sheet
 
-This cheat sheet provides a quick reference to Markdown syntax with examples to help you format your documentation effectively.
+Markdown is a plain-text format for technical documentation. This guide covers
+headings, lists, links, figures, code, and tables, with examples for documenting
+a computational method and its results. GitHub renders README files automatically;
+in VS Code, use **Markdown: Open Preview** to inspect a document while editing.
 
----
+**Contents:** [Headings](#headings) · [Emphasis](#emphasis) · [Lists](#lists)
+· [Links](#links) · [Images](#images) · [Code](#code-blocks) · [Tables](#tables)
+· [Examples](#examples)
 
 ## Headings
 
-Use `#` symbols to create headings. The number of `#` corresponds to the heading level.
+Use one `#` heading for the document title and `##` headings for its main sections.
+Add a blank line before and after headings, paragraphs, lists, and fenced code blocks.
 
 ```markdown
 # Heading 1
@@ -79,10 +85,10 @@ Use `#` symbols to create headings. The number of `#` corresponds to the heading
   ![Alt Text](path/to/image.png "Optional Title")
   ```
 
-  Example:
+  Example path, assuming an `images` subfolder beside the document:
 
   ```markdown
-  ![Generated Pattern](../images/pattern_example1.png "Pattern Example 1")
+  ![Generated Pattern](images/pattern_example1.png "Pattern Example 1")
   ```
 
 ## Code Blocks
@@ -95,10 +101,14 @@ Use `#` symbols to create headings. The number of `#` corresponds to the heading
 
 - **Fenced Code Block**
 
+  Surround the code with triple backticks and identify the language:
+
+  ````markdown
   ```python
   import numpy as np
   array = np.zeros((100, 100, 3))
   ```
+  ````
 
 - **Indented Code Block**
 
@@ -158,10 +168,11 @@ Here's a sentence with a footnote.[^1]
 
 ### Including an Image in Your Documentation
 
-To include an image from your `images` folder:
+For a document with an `images` subfolder, use a path relative to that document.
+The filename below is illustrative; replace it with an image in your project:
 
 ```markdown
-![Pattern Example](../images/pattern_example1.png "Generated Pattern")
+![Pattern Example](images/pattern_example1.png "Generated Pattern")
 ```
 
 ### Creating a Table to Summarize Results
@@ -180,16 +191,3 @@ To include an image from your `images` folder:
 - **Preview Your Markdown**: Use a Markdown editor or GitHub's preview feature to check your formatting.
 - **Keep It Simple**: Clarity is more important than complex formatting.
 - **Use Headings**: Organize your document with headings for easy navigation.
-
----
-
-## Resources
-
-- [Mastering Markdown on GitHub](https://guides.github.com/features/mastering-markdown/)
-- [Markdown Guide](https://www.markdownguide.org/)
-
----
-
-*By using Markdown effectively, you can create professional and easy-to-read documentation for your projects.*
-
----

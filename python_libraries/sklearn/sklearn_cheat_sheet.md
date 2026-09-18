@@ -113,7 +113,7 @@ Scikit-Learn provides tools for every stage of the machine learning process. Thi
   ```python
   from sklearn.preprocessing import OneHotEncoder
 
-  ohe = OneHotEncoder(sparse=False)
+  ohe = OneHotEncoder(sparse_output=False)
   X_encoded = ohe.fit_transform(X_categorical)
   ```
 
@@ -336,6 +336,7 @@ Scikit-Learn provides tools for every stage of the machine learning process. Thi
 
   ```python
   from sklearn.model_selection import GridSearchCV
+  from sklearn.neighbors import KNeighborsClassifier
 
   param_grid = {'n_neighbors': [3, 5, 7]}
   grid_search = GridSearchCV(estimator=KNeighborsClassifier(), param_grid=param_grid, cv=5)
@@ -349,6 +350,7 @@ Scikit-Learn provides tools for every stage of the machine learning process. Thi
 
   ```python
   from sklearn.model_selection import RandomizedSearchCV
+  from sklearn.ensemble import RandomForestClassifier
 
   param_distributions = {'n_estimators': [50, 100, 200], 'max_depth': [None, 10, 20]}
   random_search = RandomizedSearchCV(estimator=RandomForestClassifier(), param_distributions=param_distributions, n_iter=10, cv=5)
@@ -488,9 +490,8 @@ Scikit-Learn provides tools for every stage of the machine learning process. Thi
 ## Additional Resources
 
 - [Scikit-Learn Official Documentation](https://scikit-learn.org/stable/)
-- [Scikit-Learn Tutorials](https://scikit-learn.org/stable/tutorial/index.html)
+- [Scikit-Learn User Guide](https://scikit-learn.org/stable/user_guide.html)
 - [Machine Learning with Scikit-Learn](https://www.datacamp.com/community/tutorials/machine-learning-python)
 - [Scikit-Learn API Reference](https://scikit-learn.org/stable/modules/classes.html)
-- [Scikit-Learn Cheat Sheet by DataCamp](https://www.datacamp.com/cheat-sheet/scikit-learn-cheat-sheet-classification-and-regression-in-python)
 
 ---

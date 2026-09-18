@@ -1,189 +1,202 @@
-# git Cheat Sheet
+# Git cheat sheet
 
-This cheat sheet provides a quick reference to common Git commands. Even if you're using GitHub Desktop, understanding these commands can enhance your comprehension of version control.
+Git records the history of a project's files. This guide explains repositories,
+commits, branches, and synchronization, then provides a command reference for
+inspecting changes, recording work, and recovering earlier versions.
 
----
+**Contents:** [Fundamentals](#fundamentals) · [Command-line reference](#command-line-reference)
 
-## Basic Git Commands
+## Fundamentals
 
-### Setting Up Git
+A repository contains the project files and their recorded history. Use that
+history to compare versions, recover committed content, and develop alternatives
+on separate branches.
 
-- **Configure your username and email**
+### Working tree, staging area, and commits
 
-  ```bash
-  git config --global user.name "Your Name"
-  git config --global user.email "you@example.com"
-  ```
+| Term | Meaning |
+| --- | --- |
+| **Working tree** | The files currently present in the project directory. |
+| **Staging area** | The changes selected for the next commit. |
+| **Commit** | A recorded snapshot with an author, timestamp, message, and link to its preceding history. |
+| **Branch** | A named line of development that advances as commits are added. |
+| **Remote** | A named connection to another repository; a clone usually calls its source `origin`. |
 
-### Starting a Repository
+Saving in an editor changes a file on disk. Staging selects changes, and committing
+records them in local history. Pushing transfers local commits to a remote.
 
-- **Initialize a new Git repository in your project directory**
+```text
+Edit and save → Review and stage → Commit locally → Push to a remote
+```
 
-  ```bash
-  git init
-  ```
+A local commit survives further edits, but it does not provide an off-device copy.
+Unsaved and uncommitted work is not protected by commit history.
 
-### Checking Status
+### Inspect changes before recording them
 
-- **View the status of your files**
+A **diff** compares two versions. Read it before committing: check the intended
+changes, unexpected deletions, and files generated while running the program.
+Group related edits and write a commit message that explains the change, such as
+`Normalize the distance field before mapping RGB channels`.
 
-  ```bash
-  git status
-  ```
+A `.gitignore` file excludes matching untracked paths from normal staging. It is
+useful for caches, generated output, and local environments. It does not remove
+files already committed to the repository.
 
-### Adding Changes
+### Fetch, pull, and push
 
-- **Add a specific file to staging**
+| Operation | Effect |
+| --- | --- |
+| **Fetch** | Downloads remote commits and updates knowledge of the remote's branches without replacing working files. |
+| **Pull** | Fetches and integrates remote changes into the current branch. |
+| **Push** | Sends local commits to a remote where the account has write access. |
 
-  ```bash
-  git add my_code.py
-  ```
+Inspect local work before pulling. Commit it on the appropriate branch or
+preserve it separately. A commit records your version but does not guarantee
+that subsequent changes can be combined without conflicts.
 
-- **Add all changes in the current directory**
+Cloning copies a repository locally. Forking creates another repository under an
+account on the hosting service. A fork is useful for independently developed
+changes or contributions when direct write access is unavailable; it is not
+necessary merely to download updates.
 
-  ```bash
-  git add .
-  ```
+### Branches, merging, and pull requests
 
-### Committing Changes
+A branch lets you develop an alternative without advancing another branch.
+Switching branches changes the checked-out files in the same project directory.
+Commit or preserve unfinished edits before switching.
 
-- **Commit changes with a message**
+A **merge** combines histories. A **pull request** proposes a merge and provides
+a place to inspect and discuss the changes. The proposal and the merge are
+separate actions.
 
-  ```bash
-  git commit -m "Add initial version of my_code.py"
-  ```
+If changes cannot be merged automatically, resolve the conflict by reading both
+versions and producing the intended combined result. Verify the affected code
+before recording the resolution.
 
-### Connecting to a Remote Repository
+### Recovering work
 
-- **Add a remote repository (replace the URL with your repository URL)**
+Start by locating the relevant commit and examining its diff. You can recover
+specific content and record the repair as a new commit. A **revert** records an
+inverse change while preserving history.
 
-  ```bash
-  git remote add origin https://github.com/yourusername/your-repo-name.git
-  ```
+**Discard** removes selected uncommitted edits. **Reset** can move branch history
+and, depending on its mode, replace staged or working content. Inspect the
+operation and preserve required work before using either. Rewriting shared
+history affects anyone working from that history.
 
-### Pushing Changes
+## Command-line reference
 
-- **Push your commits to the remote repository**
+Run repository commands from its project directory. Replace uppercase placeholders
+with the relevant URL or identifier. Inspect `git status` before changing history
+or integrating remote work.
 
-  ```bash
-  git push -u origin main
-  ```
+### Create or clone
 
-### Pulling Changes
+Clone an existing repository:
 
-- **Update your local repository with changes from the remote repository**
+```sh
+git clone REPOSITORY_URL
+```
 
-  ```bash
-  git pull
-  ```
+Cloning configures the remote as `origin`; it does not require a subsequent
+`git init`. For a new local project, navigate to its directory and run:
 
-### Cloning a Repository
+```sh
+git init -b main
+```
 
-- **Clone a repository to your local machine**
+### Configure commit identity
 
-  ```bash
-  git clone https://github.com/username/repo-name.git
-  ```
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
 
----
+These settings identify commits; they do not authenticate with a hosting service.
+Omit `--global` when deliberately configuring only the current repository.
 
-## Example Workflow
+### Inspect
 
-1. **Initialize Git in your project folder**
+| Command | Purpose |
+| --- | --- |
+| `git status` | Current branch and changed files. |
+| `git diff` | Changes not yet staged. |
+| `git diff --staged` | Changes selected for the next commit. |
+| `git log --oneline -10` | Ten most recent commits. |
+| `git show COMMIT_ID` | Inspect one commit. |
+| `git remote -v` | Remote names and URLs. |
+| `git branch` | Local branches and the current selection. |
 
-   ```bash
-   git init
-   ```
+### Stage and commit
 
-2. **Create or modify files**
+Save the files first. This example records a change to `README.md`:
 
-   - Edit `my_code.py`
-   - Update `README.md`
+```sh
+git diff
+git add README.md
+git diff --staged
+git commit -m "Explain the coordinate system and units"
+```
 
-3. **Check the status of your repository**
+To unstage a file while retaining its working edits:
 
-   ```bash
-   git status
-   ```
+```sh
+git restore --staged README.md
+```
 
-4. **Stage your changes**
+### Synchronize
 
-   - Add specific files:
+```sh
+git fetch origin
+git pull --ff-only
+git push
+```
 
-     ```bash
-     git add my_code.py
-     git add README.md
-     ```
+These are separate operations. Fetch downloads remote history; pull updates the
+current branch; push uploads local commits. The `--ff-only` option refuses a pull
+that would require merging diverged histories. If it stops, inspect the histories
+rather than forcing the update.
 
-   - Or add all changes:
+A push requires a configured remote and write access. For a newly created branch,
+set its upstream when first publishing it:
 
-     ```bash
-     git add .
-     ```
+```sh
+git push -u origin compare-fields
+```
 
-5. **Commit your changes**
+### Branch and merge
 
-   ```bash
-   git commit -m "Implement array manipulation and update documentation"
-   ```
+Start an experiment from the current commit:
 
-6. **Connect to your GitHub repository**
+```sh
+git switch -c compare-fields
+```
 
-   ```bash
-   git remote add origin https://github.com/yourusername/Assignment1.git
-   ```
+After committing the work, return to the target branch and merge when appropriate:
 
-7. **Push your commits to GitHub**
+```sh
+git switch main
+git merge compare-fields
+```
 
-   ```bash
-   git push -u origin main
-   ```
+Check that `main` is the intended target. Resolve conflicts, run the affected code,
+and inspect the result before pushing. To delete the local branch after it has
+been merged:
 
----
+```sh
+git branch -d compare-fields
+```
 
-## Tips
+The lowercase `-d` refuses to delete a branch Git considers unmerged. Deleting a
+local branch does not delete a remote branch.
 
-- **Commit Often**: Frequent commits with descriptive messages help track your project's evolution.
-- **Use `.gitignore`**: Create a `.gitignore` file to exclude files you don't want to track, like temporary files or sensitive information.
-- **Branching** (Advanced): Use branches to work on new features without affecting the main codebase.
+### Reverse a committed change
 
----
+```sh
+git revert COMMIT_ID
+```
 
-## Helpful Commands
-
-- **View Commit History**
-
-  ```bash
-  git log
-  ```
-
-- **View Changes**
-
-  ```bash
-  git diff
-  ```
-
-- **Undo Last Commit (while keeping changes staged)**
-
-  ```bash
-  git reset --soft HEAD~1
-  ```
-
-- **Revert Changes in a File**
-
-  ```bash
-  git checkout -- filename
-  ```
-
----
-
-## Resources
-
-- [Git Documentation](https://git-scm.com/doc)
-- [Pro Git Book](https://git-scm.com/book/en/v2)
-
----
-
-*Note: While Git commands offer powerful control, using GitHub Desktop simplifies many of these tasks with a graphical interface. Refer to the [GitHub Desktop Guide](GitHub_Desktop_Guide.md) for more information.*
-
----
+This creates an inverse change without removing the original history. Inspect the
+result because later work may depend on the reverted commit. Preserve uncommitted
+work before any recovery operation.

@@ -217,7 +217,7 @@ sns.regplot(x='total_bill', y='tip', data=tips)
 ### Heatmaps
 
 ```python
-corr = data.corr()
+corr = data.corr(numeric_only=True)  # Exclude text columns
 sns.heatmap(corr, annot=True, cmap='coolwarm')
 ```
 

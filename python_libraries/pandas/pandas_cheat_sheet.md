@@ -226,14 +226,14 @@ df = pd.DataFrame(data)
 
   ```python
   df_filled = df.fillna(value)
-  df['column_name'].fillna(df['column_name'].mean(), inplace=True)
+  df['column_name'] = df['column_name'].fillna(df['column_name'].mean())
   ```
 
 - **Forward and Backward Fill**
 
   ```python
-  df.fillna(method='ffill', inplace=True)  # Forward Fill
-  df.fillna(method='bfill', inplace=True)  # Backward Fill
+  df_forward = df.ffill()  # Fill gaps from preceding values
+  df_backward = df.bfill()  # Fill gaps from following values
   ```
 
 ---
@@ -499,7 +499,7 @@ df = pd.DataFrame(data)
   import seaborn as sns
   import matplotlib.pyplot as plt
 
-  corr = df.corr()
+  corr = df.corr(numeric_only=True)  # Exclude text columns
   sns.heatmap(corr, annot=True)
   plt.show()
   ```

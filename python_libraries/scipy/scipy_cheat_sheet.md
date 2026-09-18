@@ -274,9 +274,8 @@ from scipy import sparse         # Sparse Matrices
 
 ## Additional Resources
 
-- [SciPy Tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/)
+- [SciPy Tutorial](https://docs.scipy.org/doc/scipy/tutorial/index.html)
 - [SciPy Lecture Notes](https://scipy-lectures.org/)
-- [Scientific Python Cheat sheet](https://scipy-lectures.org/intro/summary.html)
 - [SciPy Recipes](https://scipy-cookbook.readthedocs.io/)
 
 ---

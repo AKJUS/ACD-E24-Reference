@@ -1,33 +1,23 @@
-# Markdown Reference Materials
+# Markdown
 
-This folder contains resources to help you write clear and well-formatted documentation using Markdown.
+Markdown is a plain-text format for structuring and formatting documents. GitHub
+renders it into readable pages, making it useful for explaining methods, showing
+code, and presenting results alongside a project. This folder covers its syntax
+and common documentation patterns.
 
-## Contents
+## Essential syntax
 
-- [Markdown Cheat Sheet](markdown_cheat_sheet.md): A quick reference guide to Markdown syntax, including examples on how to include images, tables, headers, and more.
+```markdown
+# Document title
 
----
+## Section heading
 
-## Why Use Markdown?
+Use **bold** for emphasis and `inline code` for identifiers.
+```
 
-Markdown is a lightweight markup language that allows you to format text using plain-text syntax. It's widely used for documentation because it's easy to write and read.
+Separate paragraphs with blank lines. In VS Code, use **Markdown: Open Preview**
+to inspect the rendered document while editing.
 
----
+## Reference
 
-## Getting Started
-
-- **Simple Syntax**: Use symbols like `#`, `*`, and `[]()` to format your text.
-- **Versatile**: Create headings, lists, links, images, code blocks, and tables.
-
----
-
-## Next Steps
-
-- Read the [Markdown Cheat Sheet](Markdown_CheatSheet.md) to familiarize yourself with common formatting options.
-- Practice by writing your documentation in `README.md` using Markdown.
-
----
-
-*Remember, clear documentation is key to communicating your ideas effectively.*
-
----
+- [Cheat sheet](markdown_cheat_sheet.md) — Lists, links, images, code blocks, tables, and further formatting examples.
